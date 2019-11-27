@@ -200,7 +200,7 @@ func (r *Reloader) apply(ctx context.Context) error {
 			}
 
 			if len(b) == 0 {
-				return errors.Errorf("secret is empty")
+				return nil
 			}
 
 			// Detect and extract gzipped file.
