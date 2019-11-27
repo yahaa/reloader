@@ -53,7 +53,6 @@ import (
 	"compress/gzip"
 	"context"
 	"crypto/sha256"
-	"fmt"
 	"hash"
 	"io"
 	"io/ioutil"
@@ -200,7 +199,9 @@ func (r *Reloader) apply(ctx context.Context) error {
 				return errors.Wrap(err, "read file")
 			}
 
-			fmt.Printf("file []byte len %d", len(b))
+			if len(b) == 0 {
+				return errors.Errorf("secret is empty")
+			}
 
 			// Detect and extract gzipped file.
 			if bytes.Equal(b[0:3], firstGzipBytes) {
